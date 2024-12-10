@@ -5,9 +5,9 @@ namespace AuthBack.src.API.Controllers;
 
 public class AccountController : ControllerBase
 {
-    public Task<IActionResult> Login([FromBody] LoginDTO login)
+    public Task<bool> Login([FromBody] LoginDTO login)
     {
         bool userIsVerify;
-        return Ok();
+        return Task.FromResult(true);
     }
 }

@@ -1,3 +1,6 @@
+using AuthBack.src.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -15,6 +18,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// Add connection data base
+builder.Services.AddDbContext<AplicationDbContext>(options => 
+      options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Configure Independcy Inyection
 
 app.UseHttpsRedirection();
 
