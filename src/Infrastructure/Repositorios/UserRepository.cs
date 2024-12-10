@@ -31,7 +31,7 @@ namespace AuthBack.src.Infrastructure.Repositorios
         public async Task<bool> VeriffyEmail(LoginDTO login)
         {
             User user = await _repository.GetByEmail(login.Email);
-            bool emailIsVerify = user.email == login.Email;
+            bool emailIsVerify = user.Email == login.Email;
 
             return emailIsVerify;
         }

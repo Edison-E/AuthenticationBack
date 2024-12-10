@@ -10,6 +10,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+// Add connection data base
+builder.Services.AddDbContext<AplicationDbContext>(options => 
+      options.UseSqlServer(builder.Configuration.GetSection("ConnectionStrings:DefaultConnection").Value));
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -18,10 +24,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-// Add connection data base
-builder.Services.AddDbContext<AplicationDbContext>(options => 
-      options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Configure Independcy Inyection
 

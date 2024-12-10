@@ -9,8 +9,5 @@ public class AplicationDbContext : DbContext
       : base(options)
     {
     }
-    public AplicationDbContext() : base(new DbContextOptions<AplicationDbContext>())
-    {
-    }
     public DbSet<User> Users { get; set; }
 }
