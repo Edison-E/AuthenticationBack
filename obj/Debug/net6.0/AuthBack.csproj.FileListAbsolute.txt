@@ -68,3 +68,4 @@ C:\Users\edison.crespo.ext\source\AuthBack\AuthBack\obj\Debug\net6.0\ref\AuthBac
 C:\Users\edison.crespo.ext\source\AuthBack\AuthBack\bin\Debug\net6.0\Humanizer.dll
 C:\Users\edison.crespo.ext\source\AuthBack\AuthBack\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\edison.crespo.ext\source\AuthBack\AuthBack\obj\Debug\net6.0\staticwebassets.upToDateCheck.txt
+C:\Users\edison.crespo.ext\source\AuthBack\AuthBack\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

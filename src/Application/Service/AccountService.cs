@@ -1,6 +1,5 @@
 ﻿using AuthBack.src.Application.DTO;
 using AuthBack.src.Domain.Interface;
-using AuthBack.src.Infrastructure.Repositorios;
 
 namespace AuthBack.src.Application.Service;
 

@@ -23,7 +23,7 @@ public class UserRepository : IUserRepository
     public async Task<bool> VerifyPassword(LoginDTO login)
     {
        User user = await _repository.GetByEmail(login.Email);
-       bool passwordIsVerify = user.Password == login.Password;
+       bool passwordIsVerify = BCrypt.Net.BCrypt.Verify(user.Password, login.Password);
 
        return passwordIsVerify;
     }

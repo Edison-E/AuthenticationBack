@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "S4ZV2JPjyUc=",
+  "dgSpecHash": "UmC2akjXQrg=",
   "success": true,
   "projectFilePath": "C:\\Users\\edison.crespo.ext\\source\\AuthBack\\AuthBack\\AuthBack.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\edison.crespo.ext\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\edison.crespo.ext\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\edison.crespo.ext\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.1\\microsoft.aspnetcore.authentication.jwtbearer.6.0.1.nupkg.sha512",
     "C:\\Users\\edison.crespo.ext\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",

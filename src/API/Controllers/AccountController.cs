@@ -20,6 +20,7 @@ public class AccountController : ControllerBase
     [HttpPost("Login")]
     public async Task<IActionResult> Login([FromBody] LoginDTO login)
     {
+        string hash = BCrypt.Net.BCrypt.HashPassword(login.Password);
         bool userIsVerify = await _accountService.VerifyCredentials(login);
 
         if (userIsVerify)
