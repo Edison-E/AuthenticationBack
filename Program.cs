@@ -1,4 +1,7 @@
+using AuthBack.src.Application.Service;
+using AuthBack.src.Domain.Interface;
 using AuthBack.src.Infrastructure.Data;
+using AuthBack.src.Infrastructure.Repositorios;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +18,12 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AplicationDbContext>(options => 
       options.UseSqlServer(builder.Configuration.GetSection("ConnectionStrings:DefaultConnection").Value));
 
+// Configure Independcy Inyection
+builder.Services.AddScoped<AccountService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+
 
 var app = builder.Build();
 
@@ -25,7 +34,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// Configure Independcy Inyection
+
 
 app.UseHttpsRedirection();
 

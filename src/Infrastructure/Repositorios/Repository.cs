@@ -1,19 +1,16 @@
 ﻿using AuthBack.src.Domain.Interface;
 using AuthBack.src.Domain.Model;
-using Microsoft.EntityFrameworkCore;
+using AuthBack.src.Infrastructure.Data;
 
-namespace AuthBack.src.Infrastructure.Repositorios
+namespace AuthBack.src.Infrastructure.Repositorios;
+
+public class Repository<T> : IRepository<T> where T : class
 {
-    public class Repository : IRepository<User>
+    private readonly AplicationDbContext _context;
+    public Repository(AplicationDbContext context) 
     {
-        private readonly DbContext _context;
-        public Repository(DbContext context) 
-        {
-          _context = context;
-        }
-
-        public async Task<User> GetByEmail(string email) => await _context.FindAsync<User>(email);
-        
-        
+      _context = context;
     }
+
+    public async Task<T> GetByEmail(string email) => await _context.FindAsync<T>(email);
 }
