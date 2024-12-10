@@ -14,7 +14,11 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AuthBack")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
+<<<<<<< HEAD
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9cfeed9b8a3946d91cef212c30551118e897935e")]
+=======
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f7042d3ae58e41268a947a0e78f7bf871ad42ed1")]
+>>>>>>> Develop
 [assembly: System.Reflection.AssemblyProductAttribute("AuthBack")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AuthBack")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
