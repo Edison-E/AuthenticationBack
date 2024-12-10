@@ -1,0 +1,28 @@
+[
+  {
+    "ContainingType": "AuthBack.src.API.Controllers.AccountController",
+    "Method": "Login",
+    "RelativePath": "api/Controller/Login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "login",
+        "Type": "AuthBack.src.Application.DTO.LoginDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  }
+]

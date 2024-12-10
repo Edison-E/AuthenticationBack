@@ -14,7 +14,11 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AuthBack")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
+<<<<<<< HEAD
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2250db6b56e0388ea5f6c5dca486bf8f666baf18")]
+=======
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7864c147b127a20461d52ca3e9cf35ab0bb24198")]
+>>>>>>> Feat-AddDependecyInyection
 [assembly: System.Reflection.AssemblyProductAttribute("AuthBack")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AuthBack")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
