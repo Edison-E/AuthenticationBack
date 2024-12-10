@@ -11,9 +11,6 @@ public class AccountService
     { 
      _userRepository = userrepository;
     }
-    public async Task<bool> VerifyCredentials(LoginDTO login) 
-    { 
-        bool crendialsIsValid = await _userRepository.VerifyCredentials(login);
-        return crendialsIsValid;
-    }
+    public async Task<bool> VerifyCredentials(LoginDTO login) => await _userRepository.VerifyCredentials(login);
+   
 }

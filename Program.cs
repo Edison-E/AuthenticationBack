@@ -20,6 +20,7 @@ builder.Services.AddDbContext<AplicationDbContext>(options =>
 
 // Configure Independcy Inyection
 builder.Services.AddScoped<AccountService>();
+builder.Services.AddScoped<TokenService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
