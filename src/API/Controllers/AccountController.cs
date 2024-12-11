@@ -20,13 +20,19 @@ public class AccountController : ControllerBase
     [HttpPost("Login")]
     public async Task<IActionResult> Login([FromBody] LoginDTO login)
     {
-        bool userIsVerify = await _accountService.VerifyCredentials(login);
-
-        if (userIsVerify)
+        try
         {
+          bool userIsVerify = await _accountService.VerifyCredentials(login);
+
+          if (userIsVerify)
+          {
             var token = _tokenService.GenerateToken(login);
             return Ok(new {token = token});
-        }
-        return BadRequest("Email or password is incorrect");
+          }
+           return BadRequest("Email or password is incorrect");
+        }catch (Exception ex)
+        {
+            return BadRequest("User not exist");
+        }        
     }
 }
