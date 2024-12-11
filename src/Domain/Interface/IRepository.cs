@@ -2,5 +2,5 @@
 
 public interface IRepository<T> where T : class
 {
-    Task<T> GetByEmail(string email);
+    Task<T> GetById(int id);
 }

@@ -1,6 +1,5 @@
 ﻿using AuthBack.src.Application.DTO;
 using AuthBack.src.Domain.Interface;
-using AuthBack.src.Infrastructure.Repositorios;
 
 namespace AuthBack.src.Application.Service;
 
@@ -11,9 +10,6 @@ public class AccountService
     { 
      _userRepository = userrepository;
     }
-    public async Task<bool> VerifyCredentials(LoginDTO login) 
-    { 
-        bool crendialsIsValid = await _userRepository.VerifyCredentials(login);
-        return crendialsIsValid;
-    }
+    public async Task<bool> VerifyCredentials(LoginDTO login) => await _userRepository.VerifyCredentials(login);
+   
 }

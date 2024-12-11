@@ -9,16 +9,24 @@ namespace AuthBack.src.API.Controllers;
 public class AccountController : ControllerBase
 {
     private readonly AccountService _accountService;
+    private readonly TokenService _tokenService;
 
-    public AccountController(AccountService accountService)
+    public AccountController(AccountService accountService, TokenService tokenService)
     {
         _accountService = accountService;
+        _tokenService = tokenService;
     }
 
     [HttpPost("Login")]
-    public async Task<bool> Login([FromBody] LoginDTO login)
+    public async Task<IActionResult> Login([FromBody] LoginDTO login)
     {
         bool userIsVerify = await _accountService.VerifyCredentials(login);
-        return userIsVerify;
+
+        if (userIsVerify)
+        {
+            var token = _tokenService.GenerateToken(login);
+            return Ok(new {token = token});
+        }
+        return BadRequest("Email or password is incorrect");
     }
 }
