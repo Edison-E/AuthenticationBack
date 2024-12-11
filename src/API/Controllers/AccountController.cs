@@ -20,13 +20,12 @@ public class AccountController : ControllerBase
     [HttpPost("Login")]
     public async Task<IActionResult> Login([FromBody] LoginDTO login)
     {
-        string hash = BCrypt.Net.BCrypt.HashPassword(login.Password);
         bool userIsVerify = await _accountService.VerifyCredentials(login);
 
         if (userIsVerify)
         {
             var token = _tokenService.GenerateToken(login);
-            return Ok(token);
+            return Ok(new {token = token});
         }
         return BadRequest("Email or password is incorrect");
     }

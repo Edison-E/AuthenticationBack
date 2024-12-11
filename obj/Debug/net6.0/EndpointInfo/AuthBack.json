@@ -35,6 +35,18 @@
           }
         }
       }
+    },
+    "/api/User/Index": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
     }
   },
   "components": {

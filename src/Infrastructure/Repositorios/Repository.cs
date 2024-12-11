@@ -1,5 +1,6 @@
 ﻿using AuthBack.src.Domain.Interface;
 using AuthBack.src.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace AuthBack.src.Infrastructure.Repositorios;
 
@@ -10,6 +11,5 @@ public class Repository<T> : IRepository<T> where T : class
     {
       _context = context;
     }
-
-    public async Task<T> GetByEmail(string email) => await _context.FindAsync<T>(email);
+    public async Task<T> GetById(int id) => await _context.Set<T>().FindAsync(id);
 }
