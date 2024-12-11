@@ -47,6 +47,15 @@ options.TokenValidationParameters = new TokenValidationParameters
     };
 });
 
+//Configure Cors
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigins", policy =>
+    {
+        policy.WithOrigins("http://localhost:8080");
+    });
+});
+
 
 var app = builder.Build();
 
@@ -61,6 +70,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCors("AllowSpecificOrigins");
 app.UseAuthentication();
 app.UseAuthorization();
 
