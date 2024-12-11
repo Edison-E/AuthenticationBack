@@ -1,0 +1,36 @@
+# Archivos de compilación y binarios
+bin/
+obj/
+*.exe
+*.dll
+
+# Archivos de Visual Studio
+.vs/
+*.user
+*.userosscache
+*.suo
+
+# Archivos de la tienda de paquetes NuGet
+packages/
+!**/packages/build/
+!**/packages/tools/
+**/packages/*/build/
+**/packages/*/tools/
+
+# Archivos de configuración de usuario
+*.suo
+*.user
+*.userprefs
+*.sln.docstates
+
+# Archivos de caché de la IDE
+.idea/
+.vscode/
+
+# Otros archivos y directorios comunes a ignorar
+*.[Pp]ublish.xml
+*.nupkg
+*.ncrunch*
+*.DotSettings
+*.[Rr]e[Ss]harper
+*.idea/
