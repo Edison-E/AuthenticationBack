@@ -7,7 +7,7 @@ namespace AuthBack.src.API.Controllers
     [ApiController]
     public class UserController : Controller
     {
-        [Authorize]
+        
         [HttpGet("Index")]
         public async Task<IActionResult> Index()
         {
