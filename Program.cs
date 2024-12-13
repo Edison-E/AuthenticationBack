@@ -1,3 +1,5 @@
+using Auth0.AspNetCore.Authentication;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.SetBasePath(Directory.GetCurrentDirectory())
     .AddJsonFile("src/Infrastructure/config/appsettings.json", optional: false, reloadOnChange: true);
@@ -10,6 +12,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+//Configure Auth0
+builder.Services.AddAuth0WebAppAuthentication(options =>
+{
+    options.Domain = builder.Configuration["Auth0:Domain"];
+    options.ClientId = builder.Configuration["Auth0:ClientId"];
+});
 
 //Configure Cors
 builder.Services.AddCors(options =>
