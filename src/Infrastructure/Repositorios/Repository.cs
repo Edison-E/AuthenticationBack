@@ -1,12 +1,11 @@
 ﻿using AuthBack.src.Domain.Interface;
 using AuthBack.src.Infrastructure.Data;
-using Microsoft.EntityFrameworkCore;
 
 namespace AuthBack.src.Infrastructure.Repositorios;
 
 public class Repository<T> : IRepository<T> where T : class
 {
-    private readonly AplicationDbContext _context;
+    protected readonly AplicationDbContext _context;
     public Repository(AplicationDbContext context) 
     {
       _context = context;

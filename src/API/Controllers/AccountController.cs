@@ -21,11 +21,13 @@ public class AccountController : ControllerBase
     public async Task<IActionResult> Login([FromBody] LoginDTO login)
     {
 
-          bool userIsVerify = await _accountService.VerifyCredentials(login);
+          UserDTO user = await _accountService.GetUser(login);
 
-          if (userIsVerify) {
-            var token = _tokenService.GenerateToken(login);
-            return Ok(new {token = token});
+          if (!(user == null)) {
+            
+            var GetToken = _tokenService.GenerateToken(login);
+            return Ok(new {token = GetToken, name = user.Username, email = user.Email});
+
           }
 
            return BadRequest("Email or password is incorrect");

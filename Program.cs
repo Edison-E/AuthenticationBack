@@ -1,3 +1,4 @@
+using AuthBack.src.Application.MappProfiles;
 using AuthBack.src.Application.Service;
 using AuthBack.src.Domain.Interface;
 using AuthBack.src.Infrastructure.Data;
@@ -8,6 +9,10 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Configuration.SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("src/Infrastructure/config/appsettings.json", optional: false, reloadOnChange: true);
+
+
 var key = builder.Configuration.GetSection("Jwt:key").Value;
 
 // Add services to the container.
@@ -58,6 +63,9 @@ builder.Services.AddCors(options =>
         .AllowCredentials();
     });
 });
+
+//Configure Mapper
+builder.Services.AddAutoMapper(typeof(UserProfile));
 
 
 var app = builder.Build();
