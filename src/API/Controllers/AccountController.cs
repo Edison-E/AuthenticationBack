@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AuthBack.src.API.Controllers;
 
-[Route("api/Controller")]
+[Route("api/[Controller]")]
 [ApiController]
 public class AccountController : ControllerBase
 {
@@ -17,9 +17,12 @@ public class AccountController : ControllerBase
     [HttpGet("Login")]
     public async Task Login()
     {
+        var redirectUrl = Url.Action("Index","User");
         var authenticationProperties = new LoginAuthenticationPropertiesBuilder()
-            .WithRedirectUri(_configuration["Auth0:RedirectUrl"])
+            .WithRedirectUri(redirectUrl)
             .Build();
+
+        Console.WriteLine(redirectUrl);
 
         await HttpContext.ChallengeAsync(Auth0Constants.AuthenticationScheme,authenticationProperties); 
     }    

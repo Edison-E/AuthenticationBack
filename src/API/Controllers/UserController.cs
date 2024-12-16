@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace AuthBack.src.API.Controllers
 {
@@ -11,7 +10,12 @@ namespace AuthBack.src.API.Controllers
         [HttpGet("Index")]
         public async Task<IActionResult> Index()
         {
-            return Ok("Usuario autenticado, entrando sistema...");
+            if (User.Identity.IsAuthenticated)
+            {
+                return Ok("Authenticated success");
+            }
+
+            return Unauthorized("Credentials is invalid");
         }
     }
 }
