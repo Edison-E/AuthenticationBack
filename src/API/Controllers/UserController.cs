@@ -1,21 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
-namespace AuthBack.src.API.Controllers
+namespace AuthBack.src.API.Controllers;
+
+[Route("api/[Controller]")]
+[ApiController]
+public class UserController : Controller
 {
-    [Route("api/User")]
-    [ApiController]
-    public class UserController : Controller
+    
+    [HttpGet("Index")]
+    [Authorize]
+    public async Task<IActionResult> Index()
     {
-        
-        [HttpGet("Index")]
-        public async Task<IActionResult> Index()
-        {
-            if (User.Identity.IsAuthenticated)
-            {
-                return Ok("Authenticated success");
-            }
-
-            return Unauthorized("Credentials is invalid");
-        }
+        return Ok("Authenticated success");
     }
 }

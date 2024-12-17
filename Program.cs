@@ -1,5 +1,4 @@
 using Auth0.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.SetBasePath(Directory.GetCurrentDirectory())
@@ -12,14 +11,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
 //Configure Auth0
 builder.Services
 .AddAuth0WebAppAuthentication(options =>
 {
     options.Domain = builder.Configuration["Auth0:Domain"];
     options.ClientId = builder.Configuration["Auth0:ClientId"];
-    options.CallbackPath = new PathString("/api/User/Index");
+    options.CallbackPath = new PathString("/api/account/callback");
 });
 
 
@@ -28,7 +26,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigins", policy =>
     {
-        policy.WithOrigins("https://localhost:7187","http://localhost:8080")
+        policy.WithOrigins("http://localhost:8080")
         .AllowAnyMethod()
         .AllowAnyHeader()
         .AllowCredentials();
@@ -45,11 +43,8 @@ if (app.Environment.IsDevelopment())
 }
 
 
-
 app.UseHttpsRedirection();
-
 app.UseCors("AllowSpecificOrigins");
-
 app.UseAuthentication();
 app.UseAuthorization();
 

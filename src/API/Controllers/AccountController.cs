@@ -8,16 +8,11 @@ namespace AuthBack.src.API.Controllers;
 [ApiController]
 public class AccountController : ControllerBase
 {
-    private readonly IConfiguration _configuration;
-    public AccountController(IConfiguration configuration) 
-    {
-        _configuration = configuration;
-    }
 
     [HttpGet("Login")]
     public async Task Login()
     {
-        var redirectUrl = Url.Action("Index","User");
+        var redirectUrl = Url.Action("Callback","Account", null, Request.Scheme);
         var authenticationProperties = new LoginAuthenticationPropertiesBuilder()
             .WithRedirectUri(redirectUrl)
             .Build();
@@ -25,5 +20,11 @@ public class AccountController : ControllerBase
         Console.WriteLine(redirectUrl);
 
         await HttpContext.ChallengeAsync(Auth0Constants.AuthenticationScheme,authenticationProperties); 
-    }    
+    }
+
+    [HttpGet("callback")]
+    public async Task<IActionResult> Callback()
+    {
+        return Ok(new { message ="Authenticated success" });
+    }
 }
