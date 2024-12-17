@@ -5,51 +5,51 @@ using AutoMapper;
 
 namespace AuthBack.src.Application.Service;
 
-public class AccountService
+public class AccountService : ServiceBase
 {
     private readonly IUserRepository _userRepository;
-    private readonly IMapper _mapper;
-    public AccountService(IUserRepository userrepository, IMapper mapper) 
+    public AccountService(IUserRepository userRepository, IMapper mapper, ILogger<AccountService> logger) : base (mapper, logger)
     { 
-        _userRepository = userrepository;
-        _mapper = mapper;
+        _userRepository = userRepository;
     }
 
-    public async Task<bool> VerifyCredentials(LoginDTO login)
+    public async Task<UserDTO> GetUser(LoginDTO login)
     {
-        User userByEmail = await _userRepository.GetByEmail(login.Email);
-        User userById = await _userRepository.GetById(userByEmail.Id);
-
-        bool passwordIsVerify = await VerifyPassword(userById, login.Password);
-        bool emailIsVerify = await VerifyEmail(userById, login.Email);
-
-        return emailIsVerify && passwordIsVerify;
-    }
-
-    public async Task<bool> VerifyPassword(User user, string password)
-    {
-        bool passwordIsVerify = BCrypt.Net.BCrypt.Verify(password, user.Password);
-        return passwordIsVerify;
-    }
-
-    public async Task<bool> VerifyEmail(User user, string email)
-    {
-        bool emailIsVerify = user.Email == email;
-        return emailIsVerify;
-    }
-
-    public async Task<UserDTO> GetUser( LoginDTO login)
-    {
+        UserDTO userDTO = null;
         bool userIsVerify = await VerifyCredentials(login);
 
         if (userIsVerify)
         {
             User user = await _userRepository.GetByEmail(login.Email);
-            UserDTO userDto = _mapper.Map<UserDTO>(user);
+            userDTO = _mapper.Map<UserDTO>(user);
 
-            return userDto;
+            return userDTO;
         }
 
-        return null;
+        return userDTO;
     }
+
+    private async Task<bool> VerifyCredentials(LoginDTO login)
+    {
+        User userByEmail = await _userRepository.GetByEmail(login.Email);
+        User userById = await _userRepository.GetById(userByEmail.Id);
+
+        bool passwordIsVerify = await VerifyPassword(userById.Password, login.Password);
+        bool emailIsVerify = await VerifyEmail(userById.Email, login.Email);
+
+        return emailIsVerify && passwordIsVerify;
+    }
+
+    private async Task<bool> VerifyPassword(string userPassword, string loginpPassword)
+    {
+        bool passwordIsVerify = BCrypt.Net.BCrypt.Verify(loginpPassword, userPassword);
+        return passwordIsVerify;
+    }
+
+    private async Task<bool> VerifyEmail(string userEmail, string loginEmail)
+    {
+        bool emailIsVerify = userEmail == loginEmail;
+        return emailIsVerify;
+    }
+
 }

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AuthBack.src.API.Controllers;
 
-[Route("api/Controller")]
+[Route("api/[Controller]")]
 [ApiController]
 public class AccountController : ControllerBase
 {
@@ -23,10 +23,10 @@ public class AccountController : ControllerBase
 
           UserDTO user = await _accountService.GetUser(login);
 
-          if (!(user == null)) {
+          if (user is not null) {
             
-            var GetToken = _tokenService.GenerateToken(login);
-            return Ok(new {token = GetToken, name = user.Username, email = user.Email});
+            var getToken = _tokenService.GenerateToken(login);
+            return Ok(new {token = getToken, name = user.Username, email = user.Email});
 
           }
 
