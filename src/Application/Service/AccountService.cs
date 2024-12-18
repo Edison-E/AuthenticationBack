@@ -21,14 +21,14 @@ public class AccountService : ServiceBase
             User userByEmail = await _userRepository.GetByEmail(login.Email);
             if (userByEmail is null)
             {
-                _logger.LogWarning("Error: No user found with this email {Email}. ", login.Email);
+                _logger.LogWarning("Warning: No user found with this email {Email}. ", login.Email);
                 return false;
             }
 
             bool passwordIsVerify =  VerifyPassword(userByEmail.Password, login.Password);
             if (!passwordIsVerify)
             {
-                _logger.LogWarning("Error: Password {Password} is Incorrect .",login.Password); 
+                _logger.LogWarning("Warning: Password {Password} is Incorrect .", login.Password); 
                 return false;
             }
 
