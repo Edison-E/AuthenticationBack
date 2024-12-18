@@ -20,6 +20,10 @@ public class AccountController : ControllerBase
     [HttpPost("Login")]
     public async Task<IActionResult> Login([FromBody] LoginDTO login)
     {
+        if (login is null)
+        {
+            return BadRequest("The credentials is empty");
+        }
 
         bool userIsValid = await _accountService.VerifyCredentials(login);
 
@@ -29,6 +33,6 @@ public class AccountController : ControllerBase
            return Ok(new { token = getToken });
         }
         
-        return Unauthorized("Credentials is invalid !!!");
+       return Unauthorized("Credentials is invalid !!!");
     }
 }

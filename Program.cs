@@ -23,6 +23,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//Configure ILogger
+builder.Logging.AddConsole();
+
 // Add connection data base
 builder.Services.AddDbContext<AplicationDbContext>(options => 
       options.UseSqlServer(builder.Configuration.GetSection("ConnectionStrings:DefaultConnection").Value));

@@ -21,20 +21,17 @@ public class UserController : Controller
     public async Task<IActionResult> GetProfile()
     {
         string email = User.FindFirst(ClaimTypes.Email).Value;
-
         if (email is null)
         {
-            return BadRequest("Not find the user !!!");
+            return BadRequest("Email is empty");
         }
 
         UserDTO user = await _userService.GetUser(email);
-
         if (user is not null)
         {
             return Ok(new {name = user.Username, email = user.Email });
         }
 
-        return Unauthorized("Not have unauthorized !!!");
-       
+        return Unauthorized("Not have unauthorized !!!"); 
     }
 }

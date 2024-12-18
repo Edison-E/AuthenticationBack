@@ -15,9 +15,22 @@ public class UserService : ServiceBase
 
     public async Task<UserDTO> GetUser(string email)
     {
-        User user = await _userRepository.GetByEmail(email);
-        UserDTO userDTO = _mapper.Map<UserDTO>(user);
-
-        return userDTO;
+        UserDTO userDTO = null;
+        try
+        {
+            User user = await _userRepository.GetByEmail(email);
+            if (user is null)
+            {
+                _logger.LogWarning("Warning: No user find with this email {email}. ",email);
+            }
+            
+            userDTO = _mapper.Map<UserDTO>(user);
+            return userDTO;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError("A ocurred while get user with this email {email}. ",email);
+            return userDTO;
+        }
     }
 }
