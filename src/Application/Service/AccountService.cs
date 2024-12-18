@@ -2,6 +2,7 @@
 using AuthBack.src.Domain.Interface;
 using AuthBack.src.Domain.Model;
 using AutoMapper;
+using Microsoft.Extensions.Logging;
 
 namespace AuthBack.src.Application.Service;
 
@@ -13,31 +14,15 @@ public class AccountService : ServiceBase
         _userRepository = userRepository;
     }
 
-    public async Task<UserDTO> GetUser(LoginDTO login)
+    public async Task<bool> VerifyCredentials(LoginDTO login)
     {
-        UserDTO userDTO = null;
-        bool userIsVerify = await VerifyCredentials(login);
+            User userByEmail = await _userRepository.GetByEmail(login.Email);
+            User userById = await _userRepository.GetById(userByEmail.Id);
 
-        if (userIsVerify)
-        {
-            User user = await _userRepository.GetByEmail(login.Email);
-            userDTO = _mapper.Map<UserDTO>(user);
+            bool passwordIsVerify = await VerifyPassword(userById.Password, login.Password);
+            bool emailIsVerify = await VerifyEmail(userById.Email, login.Email);
 
-            return userDTO;
-        }
-
-        return userDTO;
-    }
-
-    private async Task<bool> VerifyCredentials(LoginDTO login)
-    {
-        User userByEmail = await _userRepository.GetByEmail(login.Email);
-        User userById = await _userRepository.GetById(userByEmail.Id);
-
-        bool passwordIsVerify = await VerifyPassword(userById.Password, login.Password);
-        bool emailIsVerify = await VerifyEmail(userById.Email, login.Email);
-
-        return emailIsVerify && passwordIsVerify;
+            return emailIsVerify && passwordIsVerify;
     }
 
     private async Task<bool> VerifyPassword(string userPassword, string loginpPassword)

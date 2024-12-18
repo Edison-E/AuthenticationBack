@@ -6,6 +6,7 @@ using AuthBack.src.Infrastructure.Repositorios;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,14 +23,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
 // Add connection data base
 builder.Services.AddDbContext<AplicationDbContext>(options => 
       options.UseSqlServer(builder.Configuration.GetSection("ConnectionStrings:DefaultConnection").Value));
 
 // Configure Independcy Inyection
 builder.Services.AddScoped<AccountService>();
+builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<TokenService>();
+builder.Services.AddScoped<JwtSecurityTokenHandler>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
