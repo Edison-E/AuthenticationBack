@@ -1,10 +1,4 @@
-﻿using AuthBack.src.Application.DTO;
-using AuthBack.src.Application.Service;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
-
-namespace AuthBack.src.API.Controllers;
+﻿namespace AuthBack.src.API.Controllers;
 
 [Route("api/[Controller]")]
 [ApiController]

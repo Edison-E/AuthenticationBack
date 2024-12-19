@@ -1,9 +1,4 @@
-﻿using AuthBack.src.Application.DTO;
-using AuthBack.src.Domain.Interface;
-using AuthBack.src.Domain.Model;
-using AutoMapper;
-
-namespace AuthBack.src.Application.Service;
+﻿namespace AuthBack.src.Application.Service;
 
 public class AccountService : ServiceBase
 {

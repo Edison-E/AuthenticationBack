@@ -1,11 +1,4 @@
-﻿using AuthBack.src.Application.DTO;
-using AutoMapper;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-
-namespace AuthBack.src.Application.Service;
+﻿namespace AuthBack.src.Application.Service;
 
 public class TokenService : ServiceBase
 {

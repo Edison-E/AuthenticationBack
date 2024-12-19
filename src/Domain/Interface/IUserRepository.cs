@@ -1,6 +1,4 @@
-﻿using AuthBack.src.Domain.Model;
-
-namespace AuthBack.src.Domain.Interface
+﻿namespace AuthBack.src.Domain.Interface
 {
     public interface IUserRepository
     {
