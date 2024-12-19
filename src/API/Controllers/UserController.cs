@@ -21,11 +21,11 @@ public class UserController : Controller
         }
 
         UserDTO user = await _userService.GetUser(email);
-        if (user is not null)
+        if (user is null)
         {
-            return Ok(new {name = user.Username, email = user.Email });
+           return Unauthorized("Not have unauthorized !!!"); 
         }
 
-        return Unauthorized("Not have unauthorized !!!"); 
+        return Ok(new {name = user.Username, email = user.Email });      
     }
 }
