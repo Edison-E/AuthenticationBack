@@ -36,9 +36,9 @@ public class AccountService : ServiceBase
         }
     }
 
-    private bool VerifyPassword(string userPassword, string loginpPassword)
+    private bool VerifyPassword(string userPassword, string loginPassword)
     {
-        bool passwordIsVerify = BCrypt.Net.BCrypt.Verify(loginpPassword, userPassword);
+        bool passwordIsVerify = BCrypt.Net.BCrypt.Verify(loginPassword, userPassword);
         return passwordIsVerify;
     }
 
