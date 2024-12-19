@@ -1,8 +1,4 @@
-﻿using AuthBack.src.Domain.Interface;
-using AuthBack.src.Domain.Model;
-using AuthBack.src.Infrastructure.Data;
-
-namespace AuthBack.src.Infrastructure.Repositorios;
+﻿namespace AuthBack.src.Infrastructure.Repositorios;
 
 public class UserRepository : Repository<User>, IUserRepository
 {

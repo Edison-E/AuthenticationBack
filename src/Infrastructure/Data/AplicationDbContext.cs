@@ -1,7 +1,4 @@
-﻿using AuthBack.src.Domain.Model;
-using Microsoft.EntityFrameworkCore;
-
-namespace AuthBack.src.Infrastructure.Data;
+﻿namespace AuthBack.src.Infrastructure.Data;
 
 public class AplicationDbContext : DbContext
 {

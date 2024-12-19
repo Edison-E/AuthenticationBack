@@ -1,13 +1,3 @@
-using AuthBack.src.Application.MappProfiles;
-using AuthBack.src.Application.Service;
-using AuthBack.src.Domain.Interface;
-using AuthBack.src.Infrastructure.Data;
-using AuthBack.src.Infrastructure.Repositorios;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.SetBasePath(Directory.GetCurrentDirectory())
     .AddJsonFile("src/Infrastructure/config/appsettings.json", optional: false, reloadOnChange: true);
@@ -22,6 +12,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//Configure ILogger
+builder.Logging.AddConsole();
 
 // Add connection data base
 builder.Services.AddDbContext<AplicationDbContext>(options => 
@@ -29,7 +21,9 @@ builder.Services.AddDbContext<AplicationDbContext>(options =>
 
 // Configure Independcy Inyection
 builder.Services.AddScoped<AccountService>();
+builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<TokenService>();
+builder.Services.AddScoped<JwtSecurityTokenHandler>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
@@ -68,16 +62,14 @@ builder.Services.AddCors(options =>
 builder.Services.AddAutoMapper(typeof(UserProfile));
 
 
-var app = builder.Build();
 
+var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-
 
 app.UseHttpsRedirection();
 

@@ -1,20 +1,18 @@
-﻿using AuthBack.src.Application.DTO;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
+﻿namespace AuthBack.src.Application.Service;
 
-namespace AuthBack.src.Application.Service
+public class TokenService : ServiceBase
 {
-    public class TokenService
+    private readonly IConfiguration _configuration;
+    public TokenService(IConfiguration configuration, IMapper mapper, ILogger<TokenService> logger) : base (mapper, logger)
     {
-        private readonly IConfiguration _configuration;
-        public TokenService(IConfiguration configuration) 
-        {
-            _configuration = configuration;
-        }
+        _configuration = configuration;
+    }
 
-        public string GenerateToken(LoginDTO login) 
+    public string GenerateToken(LoginDTO login) 
+    {
+        string tokenGenerate = string.Empty;
+
+        try
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]);
@@ -29,7 +27,14 @@ namespace AuthBack.src.Application.Service
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            return tokenHandler.WriteToken(token);
+            tokenGenerate = tokenHandler.WriteToken(token);
+
+            return tokenGenerate;
+        }
+        catch (Exception ex) 
+        {
+            _logger.LogError("Error: A ocurred white generate the token");
+            return tokenGenerate;
         }
     }
 }

@@ -1,7 +1,4 @@
-﻿using AuthBack.src.Domain.Interface;
-using AuthBack.src.Infrastructure.Data;
-
-namespace AuthBack.src.Infrastructure.Repositorios;
+﻿namespace AuthBack.src.Infrastructure.Repositorios;
 
 public class Repository<T> : IRepository<T> where T : class
 {

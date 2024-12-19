@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -33,5 +33,24 @@
   <ItemGroup>
     <Folder Include="doc\" />
   </ItemGroup>
+
+	<ItemGroup>
+		<Using Include="AuthBack.src.Application.DTO"/>
+		<Using Include="AuthBack.src.Application.Service"/>
+		<Using Include="AuthBack.src.Domain.Model"/>
+		<Using Include="Microsoft.AspNetCore.Mvc"/>
+		<Using Include="System.Security.Claims"/>
+		<Using Include="AuthBack.src.Domain.Interface"/>
+		<Using Include="AutoMapper"/>
+		<Using Include="Microsoft.IdentityModel.Tokens"/>
+		<Using Include="System.IdentityModel.Tokens.Jwt"/>
+		<Using Include="System.Text"/>
+		<Using Include="Microsoft.AspNetCore.Authorization"/>
+		<Using Include="AuthBack.src.Infrastructure.Data"/>
+		<Using Include="AuthBack.src.Infrastructure.Repositorios"/>
+		<Using Include="Microsoft.AspNetCore.Authentication.JwtBearer"/>
+		<Using Include="Microsoft.EntityFrameworkCore"/>
+		<Using Include="AuthBack.src.Application.MappProfiles"/>
+	</ItemGroup>
 
 </Project>

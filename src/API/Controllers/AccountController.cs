@@ -1,10 +1,6 @@
-﻿using AuthBack.src.Application.DTO;
-using AuthBack.src.Application.Service;
-using Microsoft.AspNetCore.Mvc;
+﻿namespace AuthBack.src.API.Controllers;
 
-namespace AuthBack.src.API.Controllers;
-
-[Route("api/Controller")]
+[Route("api/[Controller]")]
 [ApiController]
 public class AccountController : ControllerBase
 {
@@ -20,17 +16,19 @@ public class AccountController : ControllerBase
     [HttpPost("Login")]
     public async Task<IActionResult> Login([FromBody] LoginDTO login)
     {
+        if (login is null)
+        {
+            return BadRequest("The credentials is empty");
+        }
 
-          UserDTO user = await _accountService.GetUser(login);
+        bool userIsValid = await _accountService.VerifyCredentials(login);
 
-          if (!(user == null)) {
-            
-            var GetToken = _tokenService.GenerateToken(login);
-            return Ok(new {token = GetToken, name = user.Username, email = user.Email});
-
-          }
-
-           return BadRequest("Email or password is incorrect");
-                
+        if ( userIsValid )
+        {
+           var getToken = _tokenService.GenerateToken(login);
+           return Ok(new { token = getToken });
+        }
+        
+       return Unauthorized("Credentials is invalid !!!");
     }
 }
